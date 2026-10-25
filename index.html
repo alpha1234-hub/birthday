@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a0b1f">
+  <meta name="description" content="A little birthday surprise made for Afroze Maliha.">
+  <title>Happy Birthday, Maliha💖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=DM+Sans:wght@400;500;700&family=Hind+Siliguri:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="cake3d.js" defer></script>
+</head>
+
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="wipe" id="wipe" aria-hidden="true"><span>♥</span></div>
+
+  <header class="topbar">
+    <span class="brand">for Afroze <span class="beat">♥</span></span>
+    <div class="topbar-right">
+      <span class="counter" id="counter">1 / 6</span>
+      <button class="pill" id="mute" type="button" aria-pressed="false">♫ <span id="mute-label">Music</span></button>
+    </div>
+  </header>
+
+  <main id="pages">
+    <!-- PAGE 1 · GIFT -->
+    <section class="page page-gift active" data-title="A surprise">
+      <p class="kicker reveal" style="--d:0">🎀 november 10 · a little surprise 🎀</p>
+      <h1 class="big-title reveal" style="--d:1" id="bounce-title">Happy Birthday</h1>
+      <h2 class="name-script reveal" style="--d:2">Afroze Maliha</h2>
+      <div class="stage reveal" style="--d:3" id="stage" role="img" aria-label="Animation: Maliha walks in and cuts her birthday cake">
+        <canvas></canvas>
+        <button class="pill replay" id="replay" type="button">↻ watch again</button>
+      </div>
+      <p class="countdown reveal" style="--d:4" id="countdown"></p>
+
+      <button class="gift reveal" style="--d:5" id="gift" type="button" aria-label="Open your gift">
+        <span class="gift-lid"><span class="bow"></span></span>
+        <span class="gift-box"></span>
+        <span class="gift-glow"></span>
+      </button>
+      <p class="hint reveal" style="--d:6" id="gift-hint">tap the gift to open it ✨</p>
+      <button class="btn btn-glow hidden-btn" id="start" type="button">Begin your birthday story →</button>
+    </section>
+
+    <!-- PAGE 2 · WISH + CAKE -->
+    <section class="page page-wish" data-title="Make a wish">
+      <div class="wish-grid">
+        <div class="cake-zone reveal" style="--d:0">
+          <div class="cake" id="cake">
+            <div class="candles">
+              <button class="candle" type="button" aria-label="Blow out candle"><span class="flame"></span></button>
+              <button class="candle" type="button" aria-label="Blow out candle"><span class="flame"></span></button>
+              <button class="candle" type="button" aria-label="Blow out candle"><span class="flame"></span></button>
+            </div>
+            <div class="tier tier-top"><span class="drip"></span></div>
+            <div class="tier tier-bottom"><span class="drip"></span></div>
+            <div class="plate"></div>
+          </div>
+          <p class="hint" id="cake-hint">make a wish, then tap each candle to blow it out 🕯️</p>
+        </div>
+
+        <div class="wish-cards">
+          <p class="kicker reveal" style="--d:1">page two · my wish for you</p>
+          <article class="wish-card letter reveal" style="--d:2">
+            <span class="lang">a little letter for you ✉️</span>
+            <div id="typed-wish" aria-live="polite"></div>
+            <p class="signoff" id="signoff"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3 · SONGS -->
+    <section class="page page-songs" data-title="Your songs">
+      <p class="kicker reveal" style="--d:0">page three · three songs, three languages</p>
+      <h2 class="section-title reveal" style="--d:1">A birthday <em>playlist</em> for you 🎶</h2>
+      <div class="songs" id="songs"></div>
+      <p class="hint reveal" style="--d:5">tap a record to play it · only one plays at a time</p>
+    </section>
+
+    <!-- PAGE 4 · PHOTOS ONE -->
+    <section class="page page-photos" data-title="Simply you">
+      <p class="kicker reveal" style="--d:0">page four · the girl in these pictures</p>
+      <h2 class="section-title reveal" style="--d:1">Some things about <em>you</em>…</h2>
+      <div class="polaroids" id="polaroids-a"></div>
+      <p class="hint reveal" style="--d:6"><span class="mobile-only">swipe sideways for more · </span>tap a photo to
+        flip it 💌</p>
+    </section>
+
+    <!-- PAGE 5 · PHOTOS TWO -->
+    <section class="page page-photos page-photos-two" data-title="More of you">
+      <p class="kicker reveal" style="--d:0">page five · and a few more</p>
+      <h2 class="section-title reveal" style="--d:1">Why you're <em>unforgettable</em> ✨</h2>
+      <div class="polaroids" id="polaroids-b"></div>
+      <p class="hint reveal" style="--d:6"><span class="mobile-only">swipe sideways for more · </span>tap a photo to
+        flip it 💌</p>
+    </section>
+
+    <!-- PAGE 6 · THE QUESTION -->
+    <section class="page page-ask" data-title="One question">
+      <div class="ask-card" id="ask-step">
+        <div class="heart-orbit reveal" style="--d:0">
+          <div class="heart-beat">💖</div>
+          <span>💕</span><span>✨</span><span>🌹</span><span>💫</span>
+        </div>
+        <p class="kicker reveal" style="--d:1">page six · one last thing</p>
+        <h2 class="ask-title reveal" style="--d:2">Maliha, will you go on a <em>date</em> with me?</h2>
+        <p class="ask-sub reveal" style="--d:3" id="tease">I've been wanting to ask you this for a while… 🙈</p>
+        <div class="answers reveal" style="--d:4" id="answers">
+          <button class="btn btn-yes" id="yes" type="button">Yes 💖</button>
+          <button class="btn btn-no" id="no" type="button">No</button>
+        </div>
+      </div>
+
+      <form class="ask-card when-card" id="when-step" hidden>
+        <div class="heart-beat">🥰</div>
+        <h2 class="ask-title">Yaaay! So… <em>when are you free?</em></h2>
+        <label class="field">
+          <span>Pick a day</span>
+          <input type="date" id="when-date" required>
+        </label>
+        <label class="field">
+          <span>What time?</span>
+          <input type="time" id="when-time" value="18:00" required>
+        </label>
+        <fieldset class="chips">
+          <legend>What should we do?</legend>
+          <label><input type="radio" name="plan" value="Coffee ☕" checked><span>Coffee ☕</span></label>
+          <label><input type="radio" name="plan" value="Dinner 🍝"><span>Dinner 🍝</span></label>
+          <label><input type="radio" name="plan" value="A long walk 🌙"><span>A long walk 🌙</span></label>
+          <label><input type="radio" name="plan" value="Movie 🎬"><span>Movie 🎬</span></label>
+          <label><input type="radio" name="plan" value="Ice cream 🍦"><span>Ice cream 🍦</span></label>
+        </fieldset>
+        <label class="field">
+          <span>Anything you want to tell me? (optional)</span>
+          <input type="text" id="when-note" maxlength="140" placeholder="e.g. you're paying 😌">
+        </label>
+        <button class="btn btn-glow" type="submit">It's a date! 💞</button>
+      </form>
+
+      <div class="ask-card done-card" id="done-step" hidden>
+        <div class="heart-beat">💞</div>
+        <h2 class="ask-title">It's a <em>date!</em></h2>
+        <p class="done-summary" id="done-summary"></p>
+        <p class="ask-sub">Thank you for making me the happiest person today. Happy birthday, Afroze. 🎂</p>
+        <a class="btn btn-glow" id="send" href="#" target="_blank" rel="noopener">Send me your answer on WhatsApp 💌</a>
+        <button class="btn btn-ghost" id="change" type="button">Change the plan</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="nav" aria-label="Pages">
+    <button class="arrow" id="prev" type="button" aria-label="Previous page">←</button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" type="button" aria-label="Next page">→</button>
+  </nav>
+</body>
+
+</html>
